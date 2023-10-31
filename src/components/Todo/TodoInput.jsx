@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Button from '../Button';
 import Input from '../Input';
 
-function TodoInput({ handleAddTodo, input, setInput, desc, setDesc }) {
+function TodoInput({ handleAddTodo, input, setInput, desc, setDesc, error }) {
   const [maxLengthTitle, setMaxLengthTitle] = useState(50);
   const [maxLengthDesc, setMaxLengthDesc] = useState(80);
 
@@ -31,6 +31,7 @@ function TodoInput({ handleAddTodo, input, setInput, desc, setDesc }) {
         <Input type="text" placeholder="Deskripsi catatan" input={desc} handleMaxLength={handleMaxLengthDesc} />
         <Button>Tambah</Button>
       </form>
+      {error && <div className="bg-white rounded-lg px-5 py-2 hover:opacity-90  text-black w-fit ">Salah satu input tidak boleh ada yang kosong</div>}
     </>
   );
 }
