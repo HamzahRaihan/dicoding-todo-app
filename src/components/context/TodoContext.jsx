@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 import { getInitialData } from '../../utils';
 
 const TodoContext = createContext({
@@ -21,6 +21,7 @@ const TodoContext = createContext({
 export default TodoContext;
 
 export const TodoContextProvider = ({ children }) => {
+  console.log('rendered');
   const data = getInitialData();
   const [input, setInput] = useState('');
   const [desc, setDesc] = useState('');
@@ -111,22 +112,40 @@ export const TodoContextProvider = ({ children }) => {
     setSearch(e.target.value);
   };
 
+  // const contextValue = useMemo(() => {
+  //   return {
+  //     input: input,
+  //     desc: desc,
+  //     setInput: setInput,
+  //     setDesc: setDesc,
+  //     error: error,
+  //     search: search,
+  //     filteredActiveTodo: filteredActiveTodo,
+  //     filteredArchived: filteredArchived,
+  //     handleAddTodo: handleAddTodo,
+  //     handleActiveToArchive: handleActiveToArchive,
+  //     handleArchiveToActive: handleArchiveToActive,
+  //     handleDeleteTodo: handleDeleteTodo,
+  //     handleSearchTodo: handleSearchTodo,
+  //   };
+  // }, [input, desc, setInput, setDesc, error, search, filteredActiveTodo, filteredArchived, handleAddTodo, handleActiveToArchive, handleArchiveToActive, handleDeleteTodo, handleSearchTodo]);
+
   return (
     <TodoContext.Provider
       value={{
-        input: input,
-        desc: desc,
-        setInput: setInput,
-        setDesc: setDesc,
-        error: error,
-        search: search,
-        filteredActiveTodo: filteredActiveTodo,
-        filteredArchived: filteredArchived,
-        handleAddTodo: handleAddTodo,
-        handleActiveToArchive: handleActiveToArchive,
-        handleArchiveToActive: handleArchiveToActive,
-        handleDeleteTodo: handleDeleteTodo,
-        handleSearchTodo: handleSearchTodo,
+        input,
+        desc,
+        setInput,
+        setDesc,
+        error,
+        search,
+        filteredActiveTodo,
+        filteredArchived,
+        handleAddTodo,
+        handleActiveToArchive,
+        handleArchiveToActive,
+        handleDeleteTodo,
+        handleSearchTodo,
       }}
     >
       {children}
